@@ -4,7 +4,7 @@
  */
 package cn.orz.pascal.gfmonitor.dao;
 
-import cn.orz.pascal.gfmonitor.models.entity.ServerMonitorLog;
+import cn.orz.pascal.gfmonitor.models.entity.servermonitor.Totalservletsloadedcount;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,7 +14,7 @@ import javax.persistence.PersistenceContext;
  * @author pascalm3
  */
 @Stateless
-public class ServerMonitorLogFacade extends AbstractFacade<ServerMonitorLog> {
+public class ServerMonitorLogFacade extends AbstractFacade<Totalservletsloadedcount> {
     @PersistenceContext(unitName = "GlassFishMonitorPU")
     private EntityManager em;
 
@@ -23,7 +23,7 @@ public class ServerMonitorLogFacade extends AbstractFacade<ServerMonitorLog> {
     }
 
     public ServerMonitorLogFacade() {
-        super(ServerMonitorLog.class);
+        super(Totalservletsloadedcount.class);
     }
     
 }

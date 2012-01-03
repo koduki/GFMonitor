@@ -4,9 +4,12 @@
  */
 package cn.orz.pascal.gfmonitor.models;
 
-import cn.orz.pascal.gfmonitor.models.entity.SessionMonitorLog;
+import cn.orz.pascal.gfmonitor.models.entity.MonitorAverageLog;
+import cn.orz.pascal.gfmonitor.models.entity.sessionmonitor.Expiredsessionstotal;
 import cn.orz.pascal.gfmonitor.models.entity.MonitorLog;
-import cn.orz.pascal.gfmonitor.models.entity.ServerMonitorLog;
+import cn.orz.pascal.gfmonitor.models.entity.servermonitor.Activeservletsloadedcount;
+import cn.orz.pascal.gfmonitor.models.entity.servermonitor.Servletprocessingtimes;
+import cn.orz.pascal.gfmonitor.models.entity.servermonitor.Totalservletsloadedcount;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.Date;
@@ -31,6 +34,8 @@ import javax.management.remote.JMXServiceURL;
 public class WatchMonitor {
 
     private MBeanServerConnection mbeanserver;
+    String serverMon = "amx:pp=/mon/server-mon[server],type=servlet-mon,name=JMXMonitor_old/server";
+    String sessionMon = "amx:pp=/mon/server-mon[server],type=session-mon,name=JMXMonitor_old/server";
 
     public WatchMonitor() throws MalformedURLException, IOException {
         String url = "service:jmx:rmi://192.168.11.5:8686/jndi/rmi://192.168.11.5:8686/jmxrmi";
@@ -40,30 +45,56 @@ public class WatchMonitor {
         this.mbeanserver = connector.getMBeanServerConnection();
     }
 
-    public ServerMonitorLog getServerMonitorLog() throws MBeanException, IOException, NullPointerException, MalformedObjectNameException, InstanceNotFoundException, AttributeNotFoundException, ReflectionException {
-        String serverMon = "amx:pp=/mon/server-mon[server],type=servlet-mon,name=JMXMonitor_old/server";
-        CompositeDataSupport totalservletsloadedcount = getProperty(this.mbeanserver, serverMon, "totalservletsloadedcount");
-        ServerMonitorLog log = build(new ServerMonitorLog(), totalservletsloadedcount);
+    public Activeservletsloadedcount getActiveservletsloadedcount() throws MBeanException, IOException, NullPointerException, MalformedObjectNameException, InstanceNotFoundException, AttributeNotFoundException, ReflectionException {
+        CompositeDataSupport data = getProperty(this.mbeanserver, this.serverMon, "activeservletsloadedcount");
+        Activeservletsloadedcount log = build(new Activeservletsloadedcount(), data);
 
         return log;
     }
 
-    public SessionMonitorLog getSessionMonitorLog() throws MBeanException, IOException, NullPointerException, MalformedObjectNameException, InstanceNotFoundException, AttributeNotFoundException, ReflectionException {
-        String serverMon = "amx:pp=/mon/server-mon[server],type=session-mon,name=JMXMonitor_old/server";
-        CompositeDataSupport totalservletsloadedcount = getProperty(this.mbeanserver, serverMon, "expiredsessionstotal");
-        SessionMonitorLog log = build(new SessionMonitorLog(), totalservletsloadedcount);
+    public Totalservletsloadedcount getTotalservletsloadedcount() throws MBeanException, IOException, NullPointerException, MalformedObjectNameException, InstanceNotFoundException, AttributeNotFoundException, ReflectionException {
+        CompositeDataSupport data = getProperty(this.mbeanserver, this.serverMon, "totalservletsloadedcount");
+        Totalservletsloadedcount log = build(new Totalservletsloadedcount(), data);
 
         return log;
     }
-    
-    private <T extends MonitorLog> T build(T monitorLog, CompositeDataSupport totalservletsloadedcount) {
-        monitorLog.setName((String) totalservletsloadedcount.get("name"));
-        monitorLog.setUnit((String) totalservletsloadedcount.get("unit"));
-        monitorLog.setDescription((String) totalservletsloadedcount.get("description"));
-        monitorLog.setCount((Long) totalservletsloadedcount.get("count"));
-        monitorLog.setStartTime(new Date((Long) totalservletsloadedcount.get("startTime")));
-        monitorLog.setLastSampleTime(new Date((Long) totalservletsloadedcount.get("lastSampleTime")));
-        
+
+    public Servletprocessingtimes getServletprocessingtimes() throws MBeanException, IOException, NullPointerException, MalformedObjectNameException, InstanceNotFoundException, AttributeNotFoundException, ReflectionException {
+        CompositeDataSupport data = getProperty(this.mbeanserver, this.serverMon, "servletprocessingtimes");
+        Servletprocessingtimes log = build(new Servletprocessingtimes(), data);
+
+        return log;
+    }
+
+    public Expiredsessionstotal getExpiredsessionstotal() throws MBeanException, IOException, NullPointerException, MalformedObjectNameException, InstanceNotFoundException, AttributeNotFoundException, ReflectionException {
+        CompositeDataSupport data = getProperty(this.mbeanserver, this.sessionMon, "expiredsessionstotal");
+        Expiredsessionstotal log = build(new Expiredsessionstotal(), data);
+
+        return log;
+    }
+
+    private <T extends MonitorLog> T build(T monitorLog, CompositeDataSupport data) {
+        monitorLog.setName((String) data.get("name"));
+        monitorLog.setUnit((String) data.get("unit"));
+        monitorLog.setDescription((String) data.get("description"));
+        monitorLog.setCount((Long) data.get("count"));
+        monitorLog.setStartTime(new Date((Long) data.get("startTime")));
+        monitorLog.setLastSampleTime(new Date((Long) data.get("lastSampleTime")));
+
+        return monitorLog;
+    }
+
+    private <T extends MonitorAverageLog> T build(T monitorLog, CompositeDataSupport data) {
+        monitorLog.setName((String) data.get("name"));
+        monitorLog.setUnit((String) data.get("unit"));
+        monitorLog.setDescription((String) data.get("description"));
+        monitorLog.setCurrent((Integer) data.get("current"));
+        monitorLog.setCurrent((Integer) data.get("current"));
+        monitorLog.setHighWaterMark((Integer) data.get("highWaterMark"));
+        monitorLog.setLowWaterMark((Integer) data.get("lowWaterMark"));
+        monitorLog.setStartTime(new Date((Long) data.get("startTime")));
+        monitorLog.setLastSampleTime(new Date((Long) data.get("lastSampleTime")));
+
         return monitorLog;
     }
 
