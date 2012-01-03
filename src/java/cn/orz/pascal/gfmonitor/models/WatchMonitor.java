@@ -88,10 +88,9 @@ public class WatchMonitor {
         monitorLog.setName((String) data.get("name"));
         monitorLog.setUnit((String) data.get("unit"));
         monitorLog.setDescription((String) data.get("description"));
-        monitorLog.setCurrent((Integer) data.get("current"));
-        monitorLog.setCurrent((Integer) data.get("current"));
-        monitorLog.setHighWaterMark((Integer) data.get("highWaterMark"));
-        monitorLog.setLowWaterMark((Integer) data.get("lowWaterMark"));
+        monitorLog.setCurrentValue((Long) data.get("current"));
+        monitorLog.setHighWaterMark((Long) data.get("highWaterMark"));
+        monitorLog.setLowWaterMark((Long) data.get("lowWaterMark"));
         monitorLog.setStartTime(new Date((Long) data.get("startTime")));
         monitorLog.setLastSampleTime(new Date((Long) data.get("lastSampleTime")));
 

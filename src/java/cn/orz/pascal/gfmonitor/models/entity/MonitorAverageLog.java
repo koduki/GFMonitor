@@ -12,17 +12,17 @@ import java.util.Date;
  */
 public interface MonitorAverageLog {
 
-    public Integer getCurrent();
+    public Long getCurrentValue();
 
-    public void setCurrent(Integer current);
+    public void setCurrentValue(Long current);
 
-    public Integer getHighWaterMark();
+    public Long getHighWaterMark();
 
-    public void setHighWaterMark(Integer highWaterMark);
+    public void setHighWaterMark(Long highWaterMark);
 
-    public Integer getLowWaterMark();
+    public Long getLowWaterMark();
 
-    public void setLowWaterMark(Integer lowWaterMark);
+    public void setLowWaterMark(Long lowWaterMark);
 
     public String getDescription();
 

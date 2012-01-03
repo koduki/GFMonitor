@@ -4,6 +4,7 @@
  */
 package cn.orz.pascal.gfmonitor.dao;
 
+import cn.orz.pascal.gfmonitor.dao.AbstractFacade;
 import cn.orz.pascal.gfmonitor.models.entity.sessionmonitor.Expiredsessionstotal;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

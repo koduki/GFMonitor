@@ -29,9 +29,9 @@ public class Activeservletsloadedcount implements Serializable, MonitorAverageLo
     private String name;
     private String unit;
     private String description;
-    private Integer current;
-    private Integer highWaterMark;
-    private Integer lowWaterMark;
+    private Long currentValue;
+    private Long highWaterMark;
+    private Long lowWaterMark;
     @Temporal(TemporalType.TIME)
     private Date startTime;
     @Temporal(TemporalType.TIME)
@@ -49,32 +49,32 @@ public class Activeservletsloadedcount implements Serializable, MonitorAverageLo
     }
 
     @Override
-    public Integer getCurrent() {
-        return current;
+    public Long getCurrentValue() {
+        return currentValue;
     }
 
     @Override
-    public void setCurrent(Integer current) {
-        this.current = current;
+    public void setCurrentValue(Long current) {
+        this.currentValue = current;
     }
 
     @Override
-    public Integer getHighWaterMark() {
+    public Long getHighWaterMark() {
         return highWaterMark;
     }
 
     @Override
-    public void setHighWaterMark(Integer highWaterMark) {
+    public void setHighWaterMark(Long highWaterMark) {
         this.highWaterMark = highWaterMark;
     }
 
     @Override
-    public Integer getLowWaterMark() {
+    public Long getLowWaterMark() {
         return lowWaterMark;
     }
 
     @Override
-    public void setLowWaterMark(Integer lowWaterMark) {
+    public void setLowWaterMark(Long lowWaterMark) {
         this.lowWaterMark = lowWaterMark;
     }
 
@@ -149,7 +149,7 @@ public class Activeservletsloadedcount implements Serializable, MonitorAverageLo
         if ((this.description == null) ? (other.description != null) : !this.description.equals(other.description)) {
             return false;
         }
-        if (this.current != other.current && (this.current == null || !this.current.equals(other.current))) {
+        if (this.currentValue != other.currentValue && (this.currentValue == null || !this.currentValue.equals(other.currentValue))) {
             return false;
         }
         if (this.highWaterMark != other.highWaterMark && (this.highWaterMark == null || !this.highWaterMark.equals(other.highWaterMark))) {
@@ -174,7 +174,7 @@ public class Activeservletsloadedcount implements Serializable, MonitorAverageLo
         hash = 17 * hash + (this.name != null ? this.name.hashCode() : 0);
         hash = 17 * hash + (this.unit != null ? this.unit.hashCode() : 0);
         hash = 17 * hash + (this.description != null ? this.description.hashCode() : 0);
-        hash = 17 * hash + (this.current != null ? this.current.hashCode() : 0);
+        hash = 17 * hash + (this.currentValue != null ? this.currentValue.hashCode() : 0);
         hash = 17 * hash + (this.highWaterMark != null ? this.highWaterMark.hashCode() : 0);
         hash = 17 * hash + (this.lowWaterMark != null ? this.lowWaterMark.hashCode() : 0);
         hash = 17 * hash + (this.startTime != null ? this.startTime.hashCode() : 0);
@@ -184,6 +184,6 @@ public class Activeservletsloadedcount implements Serializable, MonitorAverageLo
 
     @Override
     public String toString() {
-        return this.getClass().getName() + "{" + "id=" + id + ", name=" + name + ", unit=" + unit + ", description=" + description + ", current=" + current + ", highWaterMark=" + highWaterMark + ", lowWaterMark=" + lowWaterMark + ", startTime=" + startTime + ", lastSampleTime=" + lastSampleTime + '}';
+        return this.getClass().getName() + "{" + "id=" + id + ", name=" + name + ", unit=" + unit + ", description=" + description + ", current=" + currentValue + ", highWaterMark=" + highWaterMark + ", lowWaterMark=" + lowWaterMark + ", startTime=" + startTime + ", lastSampleTime=" + lastSampleTime + '}';
     }
 }
