@@ -2,10 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cn.orz.pascal.gfmonitor.dao.severmonitor;
+package cn.orz.pascal.gfmonitor.model.dao.severmonitor;
 
-import cn.orz.pascal.gfmonitor.dao.AbstractFacade;
-import cn.orz.pascal.gfmonitor.models.entity.servermonitor.Totalservletsloadedcount;
+import cn.orz.pascal.gfmonitor.model.dao.AbstractFacade;
+import cn.orz.pascal.gfmonitor.models.entity.servermonitor.Activeservletsloadedcount;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author koduki
  */
 @Stateless
-public class TotalservletsloadedcountFacade extends AbstractFacade<Totalservletsloadedcount> {
+public class ActiveservletsloadedcountFacade extends AbstractFacade<Activeservletsloadedcount> {
     @PersistenceContext(unitName = "GlassFishMonitorPU")
     private EntityManager em;
 
@@ -24,8 +24,8 @@ public class TotalservletsloadedcountFacade extends AbstractFacade<Totalservlets
         return em;
     }
 
-    public TotalservletsloadedcountFacade() {
-        super(Totalservletsloadedcount.class);
+    public ActiveservletsloadedcountFacade() {
+        super(Activeservletsloadedcount.class);
     }
     
 }

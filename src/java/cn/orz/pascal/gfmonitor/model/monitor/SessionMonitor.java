@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cn.orz.pascal.gfmonitor.models;
+package cn.orz.pascal.gfmonitor.model.monitor;
 
 import cn.orz.pascal.gfmonitor.models.entity.sessionmonitor.Activatedsessionstotal;
 import cn.orz.pascal.gfmonitor.models.entity.sessionmonitor.Activesessionscurrent;
@@ -25,7 +25,7 @@ import javax.management.openmbean.CompositeDataSupport;
  * @author koduki
  */
 @Stateless
-public class SessionMonitor extends WatchMonitor {
+public class SessionMonitor extends GlassFishMonitor {
 
     protected String path = "amx:pp=/mon/server-mon[server],type=session-mon,name=JMXMonitor_old/server";
 

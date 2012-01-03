@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cn.orz.pascal.gfmonitor.models;
+package cn.orz.pascal.gfmonitor.model.monitor;
 
 import cn.orz.pascal.gfmonitor.models.entity.requestmonitor.Countrequests;
 import cn.orz.pascal.gfmonitor.models.entity.requestmonitor.Errorcount;
@@ -23,7 +23,7 @@ import javax.management.openmbean.CompositeDataSupport;
  * @author koduki
  */
 @Stateless
-public class RequestMonitor extends WatchMonitor {
+public class RequestMonitor extends GlassFishMonitor {
 
     protected String path = "amx:pp=/mon/server-mon[server],type=request-mon,name=http-service/server/request";
 

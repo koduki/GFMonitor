@@ -2,20 +2,20 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cn.orz.pascal.gfmonitor.dao.sessionmonitor;
+package cn.orz.pascal.gfmonitor.model.dao.requestmonitor;
 
-import cn.orz.pascal.gfmonitor.dao.AbstractFacade;
-import cn.orz.pascal.gfmonitor.models.entity.sessionmonitor.Expiredsessionstotal;
+import cn.orz.pascal.gfmonitor.model.dao.AbstractFacade;
+import cn.orz.pascal.gfmonitor.models.entity.requestmonitor.Errorcount;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author pascalm3
+ * @author koduki
  */
 @Stateless
-public class ExpiredsessionstotalFacade extends AbstractFacade<Expiredsessionstotal> {
+public class ErrorcountFacade extends AbstractFacade<Errorcount> {
     @PersistenceContext(unitName = "GlassFishMonitorPU")
     private EntityManager em;
 
@@ -23,8 +23,8 @@ public class ExpiredsessionstotalFacade extends AbstractFacade<Expiredsessionsto
         return em;
     }
 
-    public ExpiredsessionstotalFacade() {
-        super(Expiredsessionstotal.class);
+    public ErrorcountFacade() {
+        super(Errorcount.class);
     }
     
 }

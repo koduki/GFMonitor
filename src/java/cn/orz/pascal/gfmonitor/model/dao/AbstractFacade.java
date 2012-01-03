@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cn.orz.pascal.gfmonitor.dao;
+package cn.orz.pascal.gfmonitor.model.dao;
 
 import java.util.List;
 import javax.persistence.EntityManager;

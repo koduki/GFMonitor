@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cn.orz.pascal.gfmonitor.models;
+package cn.orz.pascal.gfmonitor.model.monitor;
 
 import cn.orz.pascal.gfmonitor.models.entity.servermonitor.Activeservletsloadedcount;
 import cn.orz.pascal.gfmonitor.models.entity.servermonitor.Servletprocessingtimes;
@@ -22,7 +22,7 @@ import javax.management.openmbean.CompositeDataSupport;
  * @author koduki
  */
 @Stateless
-public class ServerMonitor extends WatchMonitor {
+public class ServerMonitor extends GlassFishMonitor {
     protected String path = "amx:pp=/mon/server-mon[server],type=servlet-mon,name=JMXMonitor_old/server";
  
     public ServerMonitor() throws MalformedURLException, IOException {

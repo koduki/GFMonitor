@@ -2,20 +2,20 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cn.orz.pascal.gfmonitor.dao.requestmonitor;
+package cn.orz.pascal.gfmonitor.model.dao.sessionmonitor;
 
-import cn.orz.pascal.gfmonitor.dao.AbstractFacade;
-import cn.orz.pascal.gfmonitor.models.entity.requestmonitor.Maxtime;
+import cn.orz.pascal.gfmonitor.model.dao.AbstractFacade;
+import cn.orz.pascal.gfmonitor.models.entity.sessionmonitor.Passivatedsessionstotal;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author pascalm3
+ * @author koduki
  */
 @Stateless
-public class MaxtimeFacade extends AbstractFacade<Maxtime> {
+public class PassivatedsessionstotalFacade extends AbstractFacade<Passivatedsessionstotal> {
     @PersistenceContext(unitName = "GlassFishMonitorPU")
     private EntityManager em;
 
@@ -23,8 +23,8 @@ public class MaxtimeFacade extends AbstractFacade<Maxtime> {
         return em;
     }
 
-    public MaxtimeFacade() {
-        super(Maxtime.class);
+    public PassivatedsessionstotalFacade() {
+        super(Passivatedsessionstotal.class);
     }
     
 }

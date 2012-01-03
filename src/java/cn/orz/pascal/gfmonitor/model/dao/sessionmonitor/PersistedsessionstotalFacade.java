@@ -2,20 +2,20 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cn.orz.pascal.gfmonitor.dao.requestmonitor;
+package cn.orz.pascal.gfmonitor.model.dao.sessionmonitor;
 
-import cn.orz.pascal.gfmonitor.dao.AbstractFacade;
-import cn.orz.pascal.gfmonitor.models.entity.requestmonitor.Countrequests;
+import cn.orz.pascal.gfmonitor.model.dao.AbstractFacade;
+import cn.orz.pascal.gfmonitor.models.entity.sessionmonitor.Persistedsessionstotal;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author pascalm3
+ * @author koduki
  */
 @Stateless
-public class CountrequestsFacade extends AbstractFacade<Countrequests> {
+public class PersistedsessionstotalFacade extends AbstractFacade<Persistedsessionstotal> {
     @PersistenceContext(unitName = "GlassFishMonitorPU")
     private EntityManager em;
 
@@ -23,8 +23,8 @@ public class CountrequestsFacade extends AbstractFacade<Countrequests> {
         return em;
     }
 
-    public CountrequestsFacade() {
-        super(Countrequests.class);
+    public PersistedsessionstotalFacade() {
+        super(Persistedsessionstotal.class);
     }
     
 }

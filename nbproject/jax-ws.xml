@@ -2,7 +2,7 @@
 <jax-ws xmlns="http://www.netbeans.org/ns/jax-ws/1">
   <services>
     <service name="WatchLogService">
-      <implementation-class>cn.orz.pascal.gfmonitor.models.WatchLogService</implementation-class>
+      <implementation-class>cn.orz.pascal.gfmonitor.service.WatchLogService</implementation-class>
     </service>
   </services>
   <clients/>

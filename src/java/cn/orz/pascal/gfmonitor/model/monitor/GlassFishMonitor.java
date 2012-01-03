@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cn.orz.pascal.gfmonitor.models;
+package cn.orz.pascal.gfmonitor.model.monitor;
 
 import cn.orz.pascal.gfmonitor.models.entity.MonitorAverageLog;
 import cn.orz.pascal.gfmonitor.models.entity.MonitorLog;
@@ -23,9 +23,9 @@ import javax.management.remote.JMXServiceURL;
 
 /**
  *
- * @author pascalm3
+ * @author koduki
  */
-abstract public class WatchMonitor {
+abstract public class GlassFishMonitor {
 
     protected MBeanServerConnection mbeanserver;
 
