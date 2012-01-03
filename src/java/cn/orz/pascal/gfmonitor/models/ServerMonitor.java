@@ -4,7 +4,6 @@
  */
 package cn.orz.pascal.gfmonitor.models;
 
-import cn.orz.pascal.gfmonitor.models.entity.sessionmonitor.Expiredsessionstotal;
 import cn.orz.pascal.gfmonitor.models.entity.servermonitor.Activeservletsloadedcount;
 import cn.orz.pascal.gfmonitor.models.entity.servermonitor.Servletprocessingtimes;
 import cn.orz.pascal.gfmonitor.models.entity.servermonitor.Totalservletsloadedcount;
@@ -14,9 +13,7 @@ import javax.ejb.Stateless;
 import javax.management.AttributeNotFoundException;
 import javax.management.InstanceNotFoundException;
 import javax.management.MBeanException;
-import javax.management.MBeanServerConnection;
 import javax.management.MalformedObjectNameException;
-import javax.management.ObjectName;
 import javax.management.ReflectionException;
 import javax.management.openmbean.CompositeDataSupport;
 
@@ -26,28 +23,28 @@ import javax.management.openmbean.CompositeDataSupport;
  */
 @Stateless
 public class ServerMonitor extends WatchMonitor {
-    protected String serverMon = "amx:pp=/mon/server-mon[server],type=servlet-mon,name=JMXMonitor_old/server";
+    protected String path = "amx:pp=/mon/server-mon[server],type=servlet-mon,name=JMXMonitor_old/server";
  
     public ServerMonitor() throws MalformedURLException, IOException {
         super.init();
     }
 
     public Activeservletsloadedcount getActiveservletsloadedcount() throws MBeanException, IOException, NullPointerException, MalformedObjectNameException, InstanceNotFoundException, AttributeNotFoundException, ReflectionException {
-        CompositeDataSupport data = getProperty(this.mbeanserver, this.serverMon, "activeservletsloadedcount");
+        CompositeDataSupport data = getProperty(this.mbeanserver, this.path, "activeservletsloadedcount");
         Activeservletsloadedcount log = build(new Activeservletsloadedcount(), data);
 
         return log;
     }
 
     public Totalservletsloadedcount getTotalservletsloadedcount() throws MBeanException, IOException, NullPointerException, MalformedObjectNameException, InstanceNotFoundException, AttributeNotFoundException, ReflectionException {
-        CompositeDataSupport data = getProperty(this.mbeanserver, this.serverMon, "totalservletsloadedcount");
+        CompositeDataSupport data = getProperty(this.mbeanserver, this.path, "totalservletsloadedcount");
         Totalservletsloadedcount log = build(new Totalservletsloadedcount(), data);
 
         return log;
     }
 
     public Servletprocessingtimes getServletprocessingtimes() throws MBeanException, IOException, NullPointerException, MalformedObjectNameException, InstanceNotFoundException, AttributeNotFoundException, ReflectionException {
-        CompositeDataSupport data = getProperty(this.mbeanserver, this.serverMon, "servletprocessingtimes");
+        CompositeDataSupport data = getProperty(this.mbeanserver, this.path, "servletprocessingtimes");
         Servletprocessingtimes log = build(new Servletprocessingtimes(), data);
 
         return log;

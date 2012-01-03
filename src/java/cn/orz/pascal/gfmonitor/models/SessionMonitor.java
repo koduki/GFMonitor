@@ -27,49 +27,49 @@ import javax.management.openmbean.CompositeDataSupport;
 @Stateless
 public class SessionMonitor extends WatchMonitor {
 
-    protected String sessionMon = "amx:pp=/mon/server-mon[server],type=session-mon,name=JMXMonitor_old/server";
+    protected String path = "amx:pp=/mon/server-mon[server],type=session-mon,name=JMXMonitor_old/server";
 
     public SessionMonitor() throws MalformedURLException, IOException {
         super.init();
     }
 
     public Activatedsessionstotal getActivatedsessionstotal() throws MBeanException, IOException, NullPointerException, MalformedObjectNameException, InstanceNotFoundException, AttributeNotFoundException, ReflectionException {
-        CompositeDataSupport data = getProperty(this.mbeanserver, this.sessionMon, "activatedsessionstotal");
+        CompositeDataSupport data = getProperty(this.mbeanserver, this.path, "activatedsessionstotal");
         Activatedsessionstotal log = build(new Activatedsessionstotal(), data);
 
         return log;
     }    
     
     public Activesessionscurrent getActivesessionscurrent() throws MBeanException, IOException, NullPointerException, MalformedObjectNameException, InstanceNotFoundException, AttributeNotFoundException, ReflectionException {
-        CompositeDataSupport data = getProperty(this.mbeanserver, this.sessionMon, "activesessionscurrent");
+        CompositeDataSupport data = getProperty(this.mbeanserver, this.path, "activesessionscurrent");
         Activesessionscurrent log = build(new Activesessionscurrent(), data);
 
         return log;
     }
 
     public Expiredsessionstotal getExpiredsessionstotal() throws MBeanException, IOException, NullPointerException, MalformedObjectNameException, InstanceNotFoundException, AttributeNotFoundException, ReflectionException {
-        CompositeDataSupport data = getProperty(this.mbeanserver, this.sessionMon, "expiredsessionstotal");
+        CompositeDataSupport data = getProperty(this.mbeanserver, this.path, "expiredsessionstotal");
         Expiredsessionstotal log = build(new Expiredsessionstotal(), data);
 
         return log;
     }
     
     public Passivatedsessionstotal getPassivatedsessionstotal() throws MBeanException, IOException, NullPointerException, MalformedObjectNameException, InstanceNotFoundException, AttributeNotFoundException, ReflectionException {
-        CompositeDataSupport data = getProperty(this.mbeanserver, this.sessionMon, "passivatedsessionstotal");
+        CompositeDataSupport data = getProperty(this.mbeanserver, this.path, "passivatedsessionstotal");
         Passivatedsessionstotal log = build(new Passivatedsessionstotal(), data);
 
         return log;
     }
     
     public Persistedsessionstotal getPersistedsessionstotal() throws MBeanException, IOException, NullPointerException, MalformedObjectNameException, InstanceNotFoundException, AttributeNotFoundException, ReflectionException {
-        CompositeDataSupport data = getProperty(this.mbeanserver, this.sessionMon, "persistedsessionstotal");
+        CompositeDataSupport data = getProperty(this.mbeanserver, this.path, "persistedsessionstotal");
         Persistedsessionstotal log = build(new Persistedsessionstotal(), data);
 
         return log;
     }
 
     public Rejectedsessionstotal getRejectedsessionstotal() throws MBeanException, IOException, NullPointerException, MalformedObjectNameException, InstanceNotFoundException, AttributeNotFoundException, ReflectionException {
-        CompositeDataSupport data = getProperty(this.mbeanserver, this.sessionMon, "rejectedsessionstotal");
+        CompositeDataSupport data = getProperty(this.mbeanserver, this.path, "rejectedsessionstotal");
         Rejectedsessionstotal log = build(new Rejectedsessionstotal(), data);
 
         return log;

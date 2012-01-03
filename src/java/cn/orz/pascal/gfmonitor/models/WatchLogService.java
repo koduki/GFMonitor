@@ -4,9 +4,11 @@
  */
 package cn.orz.pascal.gfmonitor.models;
 
-import cn.orz.pascal.gfmonitor.models.entity.sessionmonitor.Expiredsessionstotal;
+import cn.orz.pascal.gfmonitor.dao.requestmonitor.CountrequestsFacade;
+import cn.orz.pascal.gfmonitor.dao.requestmonitor.ErrorcountFacade;
+import cn.orz.pascal.gfmonitor.dao.requestmonitor.MaxtimeFacade;
+import cn.orz.pascal.gfmonitor.dao.requestmonitor.ProcessingtimeFacade;
 import cn.orz.pascal.gfmonitor.models.entity.MonitorLog;
-import cn.orz.pascal.gfmonitor.dao.SessionMonitorLogFacade;
 import cn.orz.pascal.gfmonitor.dao.sessionmonitor.ActivatedsessionstotalFacade;
 import cn.orz.pascal.gfmonitor.dao.sessionmonitor.ActivesessionscurrentFacade;
 import cn.orz.pascal.gfmonitor.dao.sessionmonitor.ExpiredsessionstotalFacade;
@@ -34,6 +36,8 @@ public class WatchLogService {
     @EJB
     SessionMonitor sessionMonitor;
     @EJB
+    RequestMonitor requestMonitor;
+    @EJB
     ActiveservletsloadedcountFacade activeservletsloadedcountFacade;
     @EJB
     ServletprocessingtimesFacade servletprocessingtimesFacade;
@@ -51,6 +55,14 @@ public class WatchLogService {
     PersistedsessionstotalFacade persistedsessionstotalFacade;
     @EJB
     RejectedsessionstotalFacade rejectedsessionstotalFacade;
+    @EJB
+    CountrequestsFacade countrequestsFacade;
+    @EJB
+    ErrorcountFacade errorcountFacade;
+    @EJB
+    MaxtimeFacade maxtimeFacade;
+    @EJB
+    ProcessingtimeFacade processingtimeFacade;
 
     public String get() throws Exception {
         // server-mon
@@ -65,6 +77,12 @@ public class WatchLogService {
         passivatedsessionstotalFacade.create(sessionMonitor.getPassivatedsessionstotal());
         persistedsessionstotalFacade.create(sessionMonitor.getPersistedsessionstotal());
         rejectedsessionstotalFacade.create(sessionMonitor.getRejectedsessionstotal());
+        
+        // request-mon
+        countrequestsFacade.create(requestMonitor.getCountrequests());
+        errorcountFacade.create(requestMonitor.getErrorcount());
+        maxtimeFacade.create(requestMonitor.getMaxtime());
+        processingtimeFacade.create(requestMonitor.getProcessingtime());
 
         for (MonitorLog l : totalservletsloadedcountFacade.findAll()) {
             System.out.println(l.toString());
