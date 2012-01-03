@@ -5,10 +5,13 @@
 package cn.orz.pascal.gfmonitor.models.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -25,8 +28,10 @@ public class SessionMonitorLog implements Serializable, MonitorLog {
     private String unit;
     private String description;
     private long count;
-    private long startTime;
-    private long lastSampleTime;
+    @Temporal(TemporalType.TIME)
+    private Date startTime;
+    @Temporal(TemporalType.TIME)
+    private Date lastSampleTime;
     
     public SessionMonitorLog() {}
 
@@ -59,12 +64,12 @@ public class SessionMonitorLog implements Serializable, MonitorLog {
     }
 
     @Override
-    public long getLastSampleTime() {
+    public Date getLastSampleTime() {
         return lastSampleTime;
     }
 
     @Override
-    public void setLastSampleTime(long lastSampleTime) {
+    public void setLastSampleTime(Date lastSampleTime) {
         this.lastSampleTime = lastSampleTime;
     }
 
@@ -79,12 +84,12 @@ public class SessionMonitorLog implements Serializable, MonitorLog {
     }
 
     @Override
-    public long getStartTime() {
+    public Date getStartTime() {
         return startTime;
     }
 
     @Override
-    public void setStartTime(long startTime) {
+    public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
@@ -100,17 +105,18 @@ public class SessionMonitorLog implements Serializable, MonitorLog {
 
     @Override
     public int hashCode() {
-        int hash = 5;
+        int hash = 3;
         hash = 37 * hash + (this.id != null ? this.id.hashCode() : 0);
         hash = 37 * hash + (this.name != null ? this.name.hashCode() : 0);
         hash = 37 * hash + (this.unit != null ? this.unit.hashCode() : 0);
         hash = 37 * hash + (this.description != null ? this.description.hashCode() : 0);
         hash = 37 * hash + (int) (this.count ^ (this.count >>> 32));
-        hash = 37 * hash + (int) (this.startTime ^ (this.startTime >>> 32));
-        hash = 37 * hash + (int) (this.lastSampleTime ^ (this.lastSampleTime >>> 32));
+        hash = 37 * hash + (this.startTime != null ? this.startTime.hashCode() : 0);
+        hash = 37 * hash + (this.lastSampleTime != null ? this.lastSampleTime.hashCode() : 0);
+        
         return hash;
     }
-
+    
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {

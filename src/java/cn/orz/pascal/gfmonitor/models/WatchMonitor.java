@@ -9,6 +9,7 @@ import cn.orz.pascal.gfmonitor.models.entity.MonitorLog;
 import cn.orz.pascal.gfmonitor.models.entity.ServerMonitorLog;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.Date;
 import javax.ejb.Stateless;
 import javax.management.AttributeNotFoundException;
 import javax.management.InstanceNotFoundException;
@@ -60,8 +61,8 @@ public class WatchMonitor {
         monitorLog.setUnit((String) totalservletsloadedcount.get("unit"));
         monitorLog.setDescription((String) totalservletsloadedcount.get("description"));
         monitorLog.setCount((Long) totalservletsloadedcount.get("count"));
-        monitorLog.setStartTime((Long) totalservletsloadedcount.get("startTime"));
-        monitorLog.setLastSampleTime((Long) totalservletsloadedcount.get("lastSampleTime"));
+        monitorLog.setStartTime(new Date((Long) totalservletsloadedcount.get("startTime")));
+        monitorLog.setLastSampleTime(new Date((Long) totalservletsloadedcount.get("lastSampleTime")));
         
         return monitorLog;
     }

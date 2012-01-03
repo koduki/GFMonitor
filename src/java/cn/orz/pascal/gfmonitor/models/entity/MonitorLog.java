@@ -4,6 +4,8 @@
  */
 package cn.orz.pascal.gfmonitor.models.entity;
 
+import java.util.Date;
+
 /**
  *
  * @author koduki
@@ -18,17 +20,17 @@ public interface MonitorLog {
 
     public void setDescription(String description);
 
-    public long getLastSampleTime();
+    public Date getLastSampleTime();
 
-    public void setLastSampleTime(long lastSampleTime);
+    public void setLastSampleTime(Date lastSampleTime);
 
     public String getName();
 
     public void setName(String name);
 
-    public long getStartTime();
+    public Date getStartTime();
 
-    public void setStartTime(long startTime);
+    public void setStartTime(Date startTime);
 
     public String getUnit();
 
