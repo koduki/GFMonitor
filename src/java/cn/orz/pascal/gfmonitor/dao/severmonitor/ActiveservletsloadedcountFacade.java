@@ -19,6 +19,7 @@ public class ActiveservletsloadedcountFacade extends AbstractFacade<Activeservle
     @PersistenceContext(unitName = "GlassFishMonitorPU")
     private EntityManager em;
 
+    @Override
     protected EntityManager getEntityManager() {
         return em;
     }

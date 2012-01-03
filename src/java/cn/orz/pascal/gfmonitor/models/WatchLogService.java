@@ -6,9 +6,13 @@ package cn.orz.pascal.gfmonitor.models;
 
 import cn.orz.pascal.gfmonitor.models.entity.sessionmonitor.Expiredsessionstotal;
 import cn.orz.pascal.gfmonitor.models.entity.MonitorLog;
-import cn.orz.pascal.gfmonitor.models.entity.servermonitor.Totalservletsloadedcount;
-import cn.orz.pascal.gfmonitor.dao.ServerMonitorLogFacade;
 import cn.orz.pascal.gfmonitor.dao.SessionMonitorLogFacade;
+import cn.orz.pascal.gfmonitor.dao.sessionmonitor.ActivatedsessionstotalFacade;
+import cn.orz.pascal.gfmonitor.dao.sessionmonitor.ActivesessionscurrentFacade;
+import cn.orz.pascal.gfmonitor.dao.sessionmonitor.ExpiredsessionstotalFacade;
+import cn.orz.pascal.gfmonitor.dao.sessionmonitor.PassivatedsessionstotalFacade;
+import cn.orz.pascal.gfmonitor.dao.sessionmonitor.PersistedsessionstotalFacade;
+import cn.orz.pascal.gfmonitor.dao.sessionmonitor.RejectedsessionstotalFacade;
 import cn.orz.pascal.gfmonitor.dao.severmonitor.ActiveservletsloadedcountFacade;
 import cn.orz.pascal.gfmonitor.dao.severmonitor.ServletprocessingtimesFacade;
 import cn.orz.pascal.gfmonitor.dao.severmonitor.TotalservletsloadedcountFacade;
@@ -26,7 +30,9 @@ import javax.ejb.Stateless;
 public class WatchLogService {
 
     @EJB
-    WatchMonitor monitor;
+    ServerMonitor serverMonitor;
+    @EJB
+    SessionMonitor sessionMonitor;
     @EJB
     ActiveservletsloadedcountFacade activeservletsloadedcountFacade;
     @EJB
@@ -34,16 +40,31 @@ public class WatchLogService {
     @EJB
     TotalservletsloadedcountFacade totalservletsloadedcountFacade;
     @EJB
-    ServerMonitorLogFacade serverMonitorLogFacade;
+    ActivatedsessionstotalFacade activatedsessionstotalFacade;
     @EJB
-    SessionMonitorLogFacade sessionMonitorLogFacade;
+    ActivesessionscurrentFacade activesessionscurrentFacade;
+    @EJB
+    ExpiredsessionstotalFacade expiredsessionstotalFacade;
+    @EJB
+    PassivatedsessionstotalFacade passivatedsessionstotalFacade;
+    @EJB
+    PersistedsessionstotalFacade persistedsessionstotalFacade;
+    @EJB
+    RejectedsessionstotalFacade rejectedsessionstotalFacade;
 
     public String get() throws Exception {
-        activeservletsloadedcountFacade.create(monitor.getActiveservletsloadedcount());
-        totalservletsloadedcountFacade.create(monitor.getTotalservletsloadedcount());
+        // server-mon
+        activeservletsloadedcountFacade.create(serverMonitor.getActiveservletsloadedcount());
+        servletprocessingtimesFacade.create(serverMonitor.getServletprocessingtimes());
+        totalservletsloadedcountFacade.create(serverMonitor.getTotalservletsloadedcount());
 
-        Expiredsessionstotal sessionMonitorLog = monitor.getExpiredsessionstotal();
-        sessionMonitorLogFacade.create(sessionMonitorLog);
+        // session-mon
+        activatedsessionstotalFacade.create(sessionMonitor.getActivatedsessionstotal());
+        activesessionscurrentFacade.create(sessionMonitor.getActivesessionscurrent());
+        expiredsessionstotalFacade.create(sessionMonitor.getExpiredsessionstotal());
+        passivatedsessionstotalFacade.create(sessionMonitor.getPassivatedsessionstotal());
+        persistedsessionstotalFacade.create(sessionMonitor.getPersistedsessionstotal());
+        rejectedsessionstotalFacade.create(sessionMonitor.getRejectedsessionstotal());
 
         for (MonitorLog l : totalservletsloadedcountFacade.findAll()) {
             System.out.println(l.toString());

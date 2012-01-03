@@ -2,9 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cn.orz.pascal.gfmonitor.dao;
+package cn.orz.pascal.gfmonitor.dao.sessionmonitor;
 
-import cn.orz.pascal.gfmonitor.models.entity.servermonitor.Totalservletsloadedcount;
+import cn.orz.pascal.gfmonitor.dao.AbstractFacade;
+import cn.orz.pascal.gfmonitor.models.entity.sessionmonitor.Expiredsessionstotal;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author pascalm3
  */
 @Stateless
-public class ServerMonitorLogFacade extends AbstractFacade<Totalservletsloadedcount> {
+public class ExpiredsessionstotalFacade extends AbstractFacade<Expiredsessionstotal> {
     @PersistenceContext(unitName = "GlassFishMonitorPU")
     private EntityManager em;
 
@@ -22,8 +23,8 @@ public class ServerMonitorLogFacade extends AbstractFacade<Totalservletsloadedco
         return em;
     }
 
-    public ServerMonitorLogFacade() {
-        super(Totalservletsloadedcount.class);
+    public ExpiredsessionstotalFacade() {
+        super(Expiredsessionstotal.class);
     }
     
 }
