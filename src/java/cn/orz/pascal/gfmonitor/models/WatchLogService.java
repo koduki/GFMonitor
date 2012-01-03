@@ -4,7 +4,11 @@
  */
 package cn.orz.pascal.gfmonitor.models;
 
-import cn.orz.pascal.gfmonitor.dao.WatchLogFacade;
+import cn.orz.pascal.gfmonitor.models.entity.SessionMonitorLog;
+import cn.orz.pascal.gfmonitor.models.entity.MonitorLog;
+import cn.orz.pascal.gfmonitor.models.entity.ServerMonitorLog;
+import cn.orz.pascal.gfmonitor.dao.ServerMonitorLogFacade;
+import cn.orz.pascal.gfmonitor.dao.SessionMonitorLogFacade;
 import javax.ejb.EJB;
 import javax.jws.WebService;
 import javax.ejb.Stateless;
@@ -16,20 +20,24 @@ import javax.ejb.Stateless;
 @WebService(serviceName = "WatchLogService")
 @Stateless()
 public class WatchLogService {
-    @EJB WatchLogFacade dao;
-    @EJB WatchLogMonitor monitor;
+    @EJB
+    WatchMonitor monitor;
+    @EJB
+    ServerMonitorLogFacade serverMonitorLogFacade;
+    @EJB
+    SessionMonitorLogFacade sessionMonitorLogFacade;
 
-    /** This is a sample web service operation */
     public String get() throws Exception {
         ServerMonitorLog serverMonitorLog = monitor.getServerMonitorLog();
-        
-        dao.create(serverMonitorLog);
-        
-        for (ServerMonitorLog l : dao.findAll()) {
+        serverMonitorLogFacade.create(serverMonitorLog);
+
+        SessionMonitorLog sessionMonitorLog = monitor.getSessionMonitorLog();
+        sessionMonitorLogFacade.create(sessionMonitorLog);
+
+        for (MonitorLog l : sessionMonitorLogFacade.findAll()) {
             System.out.println(l.toString());
         }
-        
-        return "Hello !";
-    }
 
+        return "success";
+    }
 }

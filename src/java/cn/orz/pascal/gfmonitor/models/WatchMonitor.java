@@ -4,6 +4,9 @@
  */
 package cn.orz.pascal.gfmonitor.models;
 
+import cn.orz.pascal.gfmonitor.models.entity.SessionMonitorLog;
+import cn.orz.pascal.gfmonitor.models.entity.MonitorLog;
+import cn.orz.pascal.gfmonitor.models.entity.ServerMonitorLog;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import javax.ejb.Stateless;
@@ -24,11 +27,11 @@ import javax.management.remote.JMXServiceURL;
  * @author koduki
  */
 @Stateless
-public class WatchLogMonitor {
+public class WatchMonitor {
 
     private MBeanServerConnection mbeanserver;
 
-    public WatchLogMonitor() throws MalformedURLException, IOException {
+    public WatchMonitor() throws MalformedURLException, IOException {
         String url = "service:jmx:rmi://192.168.11.5:8686/jndi/rmi://192.168.11.5:8686/jmxrmi";
         JMXConnector connector = JMXConnectorFactory.connect(new JMXServiceURL(url));
 
@@ -39,22 +42,28 @@ public class WatchLogMonitor {
     public ServerMonitorLog getServerMonitorLog() throws MBeanException, IOException, NullPointerException, MalformedObjectNameException, InstanceNotFoundException, AttributeNotFoundException, ReflectionException {
         String serverMon = "amx:pp=/mon/server-mon[server],type=servlet-mon,name=JMXMonitor_old/server";
         CompositeDataSupport totalservletsloadedcount = getProperty(this.mbeanserver, serverMon, "totalservletsloadedcount");
-        ServerMonitorLog log = build(totalservletsloadedcount);
+        ServerMonitorLog log = build(new ServerMonitorLog(), totalservletsloadedcount);
 
         return log;
     }
 
-    private <T extends ServerMonitorLog> T build(CompositeDataSupport totalservletsloadedcount) {
-        T log = (T)new ServerMonitorLog();
-        
-        log.setName((String) totalservletsloadedcount.get("name"));
-        log.setUnit((String) totalservletsloadedcount.get("unit"));
-        log.setDescription((String) totalservletsloadedcount.get("description"));
-        log.setCount((Long) totalservletsloadedcount.get("count"));
-        log.setStartTime((Long) totalservletsloadedcount.get("startTime"));
-        log.setLastSampleTime((Long) totalservletsloadedcount.get("lastSampleTime"));
-        
+    public SessionMonitorLog getSessionMonitorLog() throws MBeanException, IOException, NullPointerException, MalformedObjectNameException, InstanceNotFoundException, AttributeNotFoundException, ReflectionException {
+        String serverMon = "amx:pp=/mon/server-mon[server],type=session-mon,name=JMXMonitor_old/server";
+        CompositeDataSupport totalservletsloadedcount = getProperty(this.mbeanserver, serverMon, "expiredsessionstotal");
+        SessionMonitorLog log = build(new SessionMonitorLog(), totalservletsloadedcount);
+
         return log;
+    }
+    
+    private <T extends MonitorLog> T build(T monitorLog, CompositeDataSupport totalservletsloadedcount) {
+        monitorLog.setName((String) totalservletsloadedcount.get("name"));
+        monitorLog.setUnit((String) totalservletsloadedcount.get("unit"));
+        monitorLog.setDescription((String) totalservletsloadedcount.get("description"));
+        monitorLog.setCount((Long) totalservletsloadedcount.get("count"));
+        monitorLog.setStartTime((Long) totalservletsloadedcount.get("startTime"));
+        monitorLog.setLastSampleTime((Long) totalservletsloadedcount.get("lastSampleTime"));
+        
+        return monitorLog;
     }
 
     private CompositeDataSupport getProperty(MBeanServerConnection mbeanserver, String name, String key) throws IOException, InstanceNotFoundException, MBeanException, ReflectionException, NullPointerException, MalformedObjectNameException, AttributeNotFoundException {

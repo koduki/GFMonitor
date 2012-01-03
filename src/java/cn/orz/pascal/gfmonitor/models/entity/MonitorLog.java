@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cn.orz.pascal.gfmonitor.models;
+package cn.orz.pascal.gfmonitor.models.entity;
 
 /**
  *

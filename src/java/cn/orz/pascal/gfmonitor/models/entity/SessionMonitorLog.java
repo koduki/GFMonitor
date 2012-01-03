@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cn.orz.pascal.gfmonitor.models;
+package cn.orz.pascal.gfmonitor.models.entity;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
@@ -15,7 +15,7 @@ import javax.persistence.Id;
  * @author koduki
  */
 @Entity
-public class ServerMonitorLog implements Serializable, MonitorLog {
+public class SessionMonitorLog implements Serializable, MonitorLog {
     private static final long serialVersionUID = 1L;
     
     @Id
@@ -28,7 +28,7 @@ public class ServerMonitorLog implements Serializable, MonitorLog {
     private long startTime;
     private long lastSampleTime;
     
-    public ServerMonitorLog() {}
+    public SessionMonitorLog() {}
 
     public Long getId() {
         return id;
@@ -119,7 +119,7 @@ public class ServerMonitorLog implements Serializable, MonitorLog {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final ServerMonitorLog other = (ServerMonitorLog) obj;
+        final SessionMonitorLog other = (SessionMonitorLog) obj;
         if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
             return false;
         }
