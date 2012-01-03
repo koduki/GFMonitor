@@ -15,7 +15,7 @@ import javax.persistence.Id;
  * @author koduki
  */
 @Entity
-public class WatchLog implements Serializable {
+public class ServerMonitorLog implements Serializable, MonitorLog {
     private static final long serialVersionUID = 1L;
     
     @Id
@@ -27,6 +27,8 @@ public class WatchLog implements Serializable {
     private long count;
     private long startTime;
     private long lastSampleTime;
+    
+    public ServerMonitorLog() {}
 
     public Long getId() {
         return id;
@@ -36,50 +38,62 @@ public class WatchLog implements Serializable {
         this.id = id;
     }
 
+    @Override
     public long getCount() {
         return count;
     }
 
+    @Override
     public void setCount(long count) {
         this.count = count;
     }
 
+    @Override
     public String getDescription() {
         return description;
     }
 
+    @Override
     public void setDescription(String description) {
         this.description = description;
     }
 
+    @Override
     public long getLastSampleTime() {
         return lastSampleTime;
     }
 
+    @Override
     public void setLastSampleTime(long lastSampleTime) {
         this.lastSampleTime = lastSampleTime;
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public void setName(String name) {
         this.name = name;
     }
 
+    @Override
     public long getStartTime() {
         return startTime;
     }
 
+    @Override
     public void setStartTime(long startTime) {
         this.startTime = startTime;
     }
 
+    @Override
     public String getUnit() {
         return unit;
     }
 
+    @Override
     public void setUnit(String unit) {
         this.unit = unit;
     }
@@ -105,7 +119,7 @@ public class WatchLog implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final WatchLog other = (WatchLog) obj;
+        final ServerMonitorLog other = (ServerMonitorLog) obj;
         if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
             return false;
         }
@@ -132,6 +146,6 @@ public class WatchLog implements Serializable {
 
     @Override
     public String toString() {
-        return "WatchLog{" + "id=" + id + ", name=" + name + ", unit=" + unit + ", description=" + description + ", count=" + count + ", startTime=" + startTime + ", lastSampleTime=" + lastSampleTime + '}';
+        return this.getClass().getName() + "{" + "id=" + id + ", name=" + name + ", unit=" + unit + ", description=" + description + ", count=" + count + ", startTime=" + startTime + ", lastSampleTime=" + lastSampleTime + '}';
     }
 }
