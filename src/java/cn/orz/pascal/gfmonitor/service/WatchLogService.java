@@ -12,7 +12,6 @@ import cn.orz.pascal.gfmonitor.model.dao.requestmonitor.CountrequestsFacade;
 import cn.orz.pascal.gfmonitor.model.dao.requestmonitor.ErrorcountFacade;
 import cn.orz.pascal.gfmonitor.model.dao.requestmonitor.MaxtimeFacade;
 import cn.orz.pascal.gfmonitor.model.dao.requestmonitor.ProcessingtimeFacade;
-import cn.orz.pascal.gfmonitor.models.entity.MonitorLog;
 import cn.orz.pascal.gfmonitor.model.dao.sessionmonitor.ActivatedsessionstotalFacade;
 import cn.orz.pascal.gfmonitor.model.dao.sessionmonitor.ActivesessionscurrentFacade;
 import cn.orz.pascal.gfmonitor.model.dao.sessionmonitor.ExpiredsessionstotalFacade;
@@ -23,8 +22,9 @@ import cn.orz.pascal.gfmonitor.model.dao.severmonitor.ActiveservletsloadedcountF
 import cn.orz.pascal.gfmonitor.model.dao.severmonitor.ServletprocessingtimesFacade;
 import cn.orz.pascal.gfmonitor.model.dao.severmonitor.TotalservletsloadedcountFacade;
 import cn.orz.pascal.gfmonitor.model.dao.system.SystemLogFacade;
-import cn.orz.pascal.gfmonitor.models.entity.MonitorAverageLog;
+import java.util.Date;
 import javax.ejb.EJB;
+import javax.ejb.Schedule;
 import javax.jws.WebService;
 import javax.ejb.Stateless;
 
@@ -35,7 +35,6 @@ import javax.ejb.Stateless;
 @WebService(serviceName = "WatchLogService")
 @Stateless()
 public class WatchLogService {
-
     @EJB
     ServerMonitor serverMonitor;
     @EJB
@@ -74,7 +73,8 @@ public class WatchLogService {
     @EJB
     SystemLogFacade systemLogFacade;
 
-    public String get() throws Exception {
+    @Schedule(minute="*/3", hour="*")
+    public void writeLog() throws Exception {
         // server-mon
         activeservletsloadedcountFacade.create(serverMonitor.getActiveservletsloadedcount());
         servletprocessingtimesFacade.create(serverMonitor.getServletprocessingtimes());
@@ -96,14 +96,7 @@ public class WatchLogService {
         
         // system-mon
         systemLogFacade.create(systemMonitor.getSystemLog());
-        
-        for (MonitorLog l : totalservletsloadedcountFacade.findAll()) {
-            System.out.println(l.toString());
-        }
-
-        for (MonitorAverageLog l : activeservletsloadedcountFacade.findAll()) {
-            System.out.println(l.toString());
-        }
-        return "success";
+           
+        System.out.println(new Date(System.currentTimeMillis()));
     }
 }

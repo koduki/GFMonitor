@@ -30,7 +30,7 @@ abstract public class GlassFishMonitor {
     protected MBeanServerConnection mbeanserver;
 
     public void init() throws MalformedURLException, IOException {
-        String url = "service:jmx:rmi://192.168.11.5:8686/jndi/rmi://192.168.11.5:8686/jmxrmi";
+        String url = "service:jmx:rmi://localhost:8686/jndi/rmi://localhost:8686/jmxrmi";
         JMXConnector connector = JMXConnectorFactory.connect(new JMXServiceURL(url));
 
         // MBeanServerConnection取得
@@ -56,6 +56,7 @@ abstract public class GlassFishMonitor {
         monitorLog.setLowWaterMark((Long) data.get("lowWaterMark"));
         monitorLog.setStartTime(new Date((Long) data.get("startTime")));
         monitorLog.setLastSampleTime(new Date((Long) data.get("lastSampleTime")));
+        
         return monitorLog;
     }
 
