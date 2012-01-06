@@ -44,6 +44,7 @@ abstract public class GlassFishMonitor {
         monitorLog.setCount((Long) data.get("count"));
         monitorLog.setStartTime(new Date((Long) data.get("startTime")));
         monitorLog.setLastSampleTime(new Date((Long) data.get("lastSampleTime")));
+      
         return monitorLog;
     }
 
@@ -63,6 +64,7 @@ abstract public class GlassFishMonitor {
     protected CompositeDataSupport getProperty(MBeanServerConnection mbeanserver, String name, String key) throws IOException, InstanceNotFoundException, MBeanException, ReflectionException, NullPointerException, MalformedObjectNameException, AttributeNotFoundException {
         ObjectName objName = new ObjectName(name);
         CompositeDataSupport activeservletsloadedcount = (CompositeDataSupport) mbeanserver.getAttribute(objName, key);
+       
         return activeservletsloadedcount;
     }
 }

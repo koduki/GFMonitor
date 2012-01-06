@@ -12,6 +12,9 @@
             <p:dialog header="PrimeFaces Dialog" widgetVar="dlg1" width="500">
                 For more information visit <a href="http://primefaces.org">http://primefaces.org</a>.
             </p:dialog>
+            <p:lineChart value="#{summaryMonitorView.systemLogs}" var="log" xfield="#{log.heapMemoryUsageUsed}">
+                <p:chartSeries label="HeapMemoryUsageUsed" value="#{log.heapMemoryUsageUsed}" />
+            </p:lineChart>
         </h:form>
     </h:body>
 </html>
